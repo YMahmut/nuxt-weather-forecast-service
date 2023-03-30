@@ -6,6 +6,11 @@
 # install dependencies
 $ yarn install
 
+#possible dependencies version discrepancy about axios
+$ yarn uninstall axios
+$ yarn add  axios@0.21.1
+$ yarn add dotenv # i think it doesn't need.
+
 # serve with hot reload at localhost:3000
 $ yarn dev
 

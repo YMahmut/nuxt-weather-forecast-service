@@ -6,8 +6,9 @@ export const state = () => ({
     citiesForTable:["London","New York","Tokyo","Istanbul"],
     allCitiesForTable:[],
     showInput:false,
-    url:process.env.BASE_URL,
-    apik:process.env.MY_WEATHER_APIK,
+    forecastData:null,
+    url:"https://api.openweathermap.org/data/2.5/",
+    apik:process.env.MY_WEATHER_APIK || "appid=...", /* Remove this three dot ("...") and just Enter your openweathermap api key here*/
     isLocationPermissionAsked:false,
   })
   
@@ -19,6 +20,11 @@ export const state = () => ({
         state.selectedCityData=payload;
         if(!!payload)
             state.city=`${payload.name}`;
+    },
+    setForecastData(state,payload){
+        state.forecastData=payload;
+        if(!!payload)
+        state.city=`${payload.city.name}`;
     },
     setAllCitiesForTable(state,payload){
         state.allCitiesForTable.unshift(payload);
@@ -65,5 +71,14 @@ export const state = () => ({
             })
           });
     },
-   
+    async getForecastData({state,commit},payload){
+        const city=!!payload ? payload : state.city || "İstanbul";
+        if(!!city && !!city.length)
+            axios.get(state.url + "forecast?" + `q=${city}&&` + state.apik +"&units=metric")
+            .then(res=>{
+                commit("setForecastData",res.data);
+            }).catch((e)=>{
+                console.log(e)
+            })
+    },
   }

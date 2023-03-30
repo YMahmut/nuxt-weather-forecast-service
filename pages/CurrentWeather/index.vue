@@ -25,14 +25,13 @@
               </div>
             </div>
         </transition-group>
-  
         <div class="input-wrapper">  
           <Transition name="bounce">
-            <input autofocus v-if="showInput" class="city-searching-input" type="text" v-model="searchingCity" @keypress.enter="SelectCity" :placeholder="city">
+            <autocomplete-input autofocus v-if="showInput" v-model="searchingCity" :SelectCity="SelectCity"/>
           </Transition>
         </div>
         <TransitionGroup name="bounce">
-          <ul :key="'bounce-0'" v-if="!!allCitiesForTable && allCitiesForTable.length>=4" class="citiesForTable-list-wrapper">
+          <ul :key="'bounce-0'" v-if="!!allCitiesForTable && allCitiesForTable.length>=4" class="citiesForTable-list-wrapper" :style="!!searchingCity.length ? {opacity:'0.1'}:{}">
             <li class="citiesForTable-list" :key="'bounce-'+index" v-for="(specificCity,index) in allCitiesForTable" @click="viewDetail(specificCity.name)">
                 <span :key="'bounce-'+index+'-1'">{{ specificCity.name }}</span>
                 <span :key="'bounce-'+index+'-2'" >{{  Math.floor(specificCity.main.temp) }} °C</span>
@@ -59,7 +58,6 @@
                 },
                 weatherDataType:"CurrentWeather",
                 isMessageShowing:true,
-                
             }
         },
         computed:{
@@ -124,12 +122,10 @@
                   });
               }else this.getCurrentWeatherData();
           },
-           
             SelectCity(){
-                setTimeout(()=>{
-                    this.getCurrentWeatherData(this.searchingCity);
-                },500);
+                this.getCurrentWeatherData(this.searchingCity);
             },
+                  
             OpenSelection(selection){
                 this.weatherDataType=selection;
                 this.$router.push("/"+selection);
@@ -138,11 +134,6 @@
               this.$router.push('/CurrentWeather/'+cityName);
             }
         },
-        watch:{
-          city(newVal){
-            this.searchingCity=newVal;
-          }
-        }
     }
   </script>
   
@@ -233,12 +224,7 @@
     
     border-radius: 15px;
   }
-  .city-searching-input{
-    margin:10px;
-    padding:13px;
-    border-radius: 7px;
-    font-size: large;
-  }
+ 
   .container{
     display: flex;
     flex-direction: row;

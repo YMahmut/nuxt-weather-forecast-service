@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="input-wrapper">  
-            <input  class="city-searching-input" type="text" v-model="searchingCity" @keypress.enter="SelectCity" :placeholder="city">
+            <autocomplete-input autofocus v-model="searchingCity" :SelectCity="SelectCity"/>
         </div>
 
 
@@ -111,11 +111,6 @@ import { mapActions, mapState } from "vuex";
                 },500);
             }
         },
-        watch:{
-            city(newValue){
-                this.searchingCity=newValue;
-            }
-        }
     }
 </script>
 

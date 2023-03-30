@@ -72,7 +72,7 @@ import { mapState,mapActions } from 'vuex';
 .container{
   display: flex;
   flex-direction: row;
-  margin: 20px;
+  margin: 15px;
   padding: 10px;
   align-items: center;
   justify-content: space-around;

@@ -1,9 +1,14 @@
 <template>
-    <div>
-      <input class="city-searching-input" :style="showWarning ? {background:'red'}:{}" type="text" v-model="searchText" @input="filterCities" placeholder="Enter a city..." @keypress.enter="SelectSearchingCity" >
-      <ul class="suggestions-wrapper" v-if="showSuggestions">
-        <li v-for="(city, index) in filteredCities" :key="index" @click="searchForCity(city)">{{ city }}</li>
+    <div class="centerilize">
+      <input class="city-searching-input" :style="showWarning ? {background:'red'}:{}" type="text" v-model="searchText" @input="filterCities" placeholder="Enter a city..." @keypress.enter="SelectSearchingCity" />
+      <div class="auto-complete-options">
+        <ul class="suggestions-wrapper centerilize" v-if="showSuggestions">
+          <li v-for="(city, index) in filteredCities" :key="index" @click="searchForCity(city)">
+            <p v-if="city===searchText" @click="SelectSearchingCity" style="text-align: center;">OK</p>
+            <p v-else>{{ city }}</p>
+          </li>
       </ul>
+      </div>
       <div v-if="showWarning" class="suggestions-wrapper">
         <warning-box :error-message="'no match'"/>
       </div>
@@ -56,7 +61,7 @@ import WarningBox from './WarningBox.vue';
     },
     watch:{
           searchText(newVal){
-            this.$emit("input",newVal)
+            this.$emit("input",newVal);
           },
           filteredCities(newVal){
             if(newVal.length===1){
@@ -81,9 +86,35 @@ import WarningBox from './WarningBox.vue';
             background: #f5f0e6;
             position: absolute;
             list-style: none;
-            width: 17%;
-            margin: 10px;
-            padding: 5px;
+            width: max-content;
+            margin: 5px;
+            padding: 10px;
             border-radius: 5px;
+        }
+        .centerilize{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .auto-complete-options{
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+        }
+        li{
+          padding: 8px;
+          min-width: 200px;
+          width: 100%;
+          height: 100%;
+          border-radius: 7px;
+        }
+        li:hover{
+          cursor: pointer;
+          background: rgb(250, 219, 179);
+        }
+        li > p{
+          margin: 0;
+          padding: 5px;
         }
     </style>

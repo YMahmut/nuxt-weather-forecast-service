@@ -31,7 +31,7 @@
           </Transition>
         </div>
         <TransitionGroup name="bounce">
-          <ul :key="'bounce-0'" v-if="!!allCitiesForTable && allCitiesForTable.length>=4" class="citiesForTable-list-wrapper" :style="!!searchingCity.length ? {opacity:'0.1'}:{}">
+          <ul :key="'bounce-0'" v-if="!!allCitiesForTable && allCitiesForTable.length>=4" class="citiesForTable-list-wrapper" :style="!!searchingCity.length ? {display:'none'}:{display:'flex'}">
             <li class="citiesForTable-list" :key="'bounce-'+index" v-for="(specificCity,index) in allCitiesForTable" @click="viewDetail(specificCity.name)">
                 <span :key="'bounce-'+index+'-1'">{{ specificCity.name }}</span>
                 <span :key="'bounce-'+index+'-2'" >{{  Math.floor(specificCity.main.temp) }} °C</span>

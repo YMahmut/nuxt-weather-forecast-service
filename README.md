@@ -3,16 +3,20 @@
 ## Build Setup
 
 ```bash
+#First of all use your openweathermap api key.Look at 11. line at store/index.js file. the state of apikey must be filled as described by comment.
+
+#open the project folder
+$ cd nuxt-weather-forecast-service
+
 # install dependencies
 $ yarn install
 
-#possible dependencies version discrepancy about axios
-$ yarn uninstall axios
-$ yarn add  axios@0.21.1
-$ yarn add dotenv # i think it doesn't need.
-
 # serve with hot reload at localhost:3000
 $ yarn dev
+
+# incase of getting axios module error about "require does not supporting"
+$ yarn remove axios
+$ yarn add  axios@0.21.1
 
 # build for production and launch server
 $ yarn build

@@ -13,7 +13,7 @@
 
 
         <transition-group name="list">
-            <div key="t-f-1-1" v-if=" !!forecastData && shiftTime" class="container-wrapper">  
+            <div key="t-f-1-1" v-if=" !!forecastData && shiftTime" class="container-wrapper" :style="!!searchingCity.length ? {opacity:'0.2'}:{opacity:'1'}">  
                 <h2>{{ forecastData.city.name }} ( {{ forecastDay ==="nextDay" ? getNextDay : forecastDay }} )</h2>
                 <ul class="container">
                     <li :key="index" v-for="(fcast,index) in ForecastData(forecastDay)">
@@ -24,7 +24,7 @@
                     </li>
                 </ul>
             </div>
-            <div key="t-f-1-2" v-if="!!forecastDay" class="container-wrapper forecasts-buttons">
+            <div key="t-f-1-2" v-if="!!forecastDay" class="container-wrapper forecasts-buttons" :style="!!searchingCity.length ? {opacity:'0.2'}:{opacity:'1'}">
                     <button v-if="forecastDay !=='Today'" class="btn-1" @click="SelectForecastDay('Today')">Today</button>
                     <button v-if="forecastDay !=='Tomorrow'" class="btn-1" @click="SelectForecastDay('Tomorrow')">Tomorrow</button>
                     <button v-if="forecastDay !=='nextDay'" class="btn-1" @click="SelectForecastDay('nextDay')">{{ getNextDay}}</button>

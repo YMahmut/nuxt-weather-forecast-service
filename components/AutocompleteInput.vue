@@ -90,6 +90,7 @@ import WarningBox from './WarningBox.vue';
             margin: 5px;
             padding: 10px;
             border-radius: 5px;
+            z-index: 10;
         }
         .centerilize{
           display: flex;
@@ -108,6 +109,7 @@ import WarningBox from './WarningBox.vue';
           width: 100%;
           height: 100%;
           border-radius: 7px;
+          z-index: 10;
         }
         .suggestions:hover{
           cursor: pointer;
@@ -116,5 +118,6 @@ import WarningBox from './WarningBox.vue';
         .suggestions > p{
           margin: 0;
           padding: 5px;
+          z-index: 10;
         }
     </style>

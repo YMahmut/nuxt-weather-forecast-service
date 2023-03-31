@@ -4,7 +4,7 @@
       <div class="auto-complete-options">
         <ul class="suggestions-wrapper centerilize" v-if="showSuggestions">
           <li v-for="(city, index) in filteredCities" :key="index" @click="searchForCity(city)">
-            <p v-if="city===searchText" @click="SelectSearchingCity" style="text-align: center;">OK</p>
+            <p v-if="city.toLowerCase()===searchText.toLowerCase()" @click="SelectSearchingCity" style="text-align: center;">OK</p>
             <p v-else>{{ city }}</p>
           </li>
       </ul>

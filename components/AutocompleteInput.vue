@@ -3,7 +3,7 @@
       <input class="city-searching-input" :style="showWarning ? {background:'red'}:{}" type="text" v-model="searchText" @input="filterCities" placeholder="Enter a city..." @keypress.enter="SelectSearchingCity" />
       <div class="auto-complete-options">
         <ul class="suggestions-wrapper centerilize" v-if="showSuggestions">
-          <li v-for="(city, index) in filteredCities" :key="index" @click="searchForCity(city)">
+          <li class="suggestions" v-for="(city, index) in filteredCities" :key="index" @click="searchForCity(city)">
             <p v-if="city.toLowerCase()===searchText.toLowerCase()" @click="SelectSearchingCity" style="text-align: center;">OK</p>
             <p v-else>{{ city }}</p>
           </li>
@@ -102,18 +102,18 @@ import WarningBox from './WarningBox.vue';
           align-items: baseline;
           justify-content: center;
         }
-        li{
+        .suggestions{
           padding: 8px;
           min-width: 200px;
           width: 100%;
           height: 100%;
           border-radius: 7px;
         }
-        li:hover{
+        .suggestions:hover{
           cursor: pointer;
           background: rgb(250, 219, 179);
         }
-        li > p{
+        .suggestions > p{
           margin: 0;
           padding: 5px;
         }
